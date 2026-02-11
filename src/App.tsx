@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { RouterProvider } from '@tanstack/react-router'
 import { router } from './routes'
-import { useAuth } from '@/contexts/rootRoute'
-import { AuthProvider } from '@/providers/auth'
+import { useAuth } from '@/contexts/useAuthContext'
+import { AuthProvider } from '@/providers/useAuthProvider'
 
 const InnerApp: React.FC = () => {
   const auth = useAuth()
-
-  useEffect(() => {
-    auth.login({ password: '1', userName: 'John Doe' })
-  }, [auth])
 
   return (
     <RouterProvider

@@ -1,4 +1,5 @@
-import type { RootRouteContext } from '@/contexts/rootRoute'
+import type { useAuthContext } from '@/contexts/useAuthContext'
+import { useAuthStore } from '@/stores/useAuthStore'
 import {
   createRouter,
   createRoute,
@@ -7,7 +8,7 @@ import {
   redirect,
 } from '@tanstack/react-router'
 
-const rootRoute = createRootRouteWithContext<RootRouteContext>()({
+const rootRoute = createRootRouteWithContext<useAuthContext>()({
   component: lazyRouteComponent(() => import('@/layout/DefaultLayout')),
 })
 
@@ -87,7 +88,7 @@ const dataRoute = createRoute({
         search: { redirectTo: location.href },
       })
     }
-    if (!context.user?.permissions.includes('update')) {
+    if (!context.user?.permissions.includes('read')) {
       throw redirect({
         to: '/no-auth',
         search: { redirectTo: location.href },
@@ -117,12 +118,7 @@ const routeTree = rootRoute.addChildren([
 
 export const router = createRouter({
   routeTree,
-  context: {
-    isAuthenticated: false,
-    user: null,
-    logout: () => {},
-    login: () => Promise.resolve(),
-  },
+  context: useAuthStore.getState(),
   defaultNotFoundComponent: () => <div>默认 404 页面</div>,
   defaultOnCatch(error, errorInfo) {
     console.error('路由错误:', error, errorInfo)

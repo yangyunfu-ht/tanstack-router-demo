@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useAuth } from '@/contexts/rootRoute'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 const api = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
@@ -18,8 +18,7 @@ let isRefreshing = false
 let requestQueue: Array<(token: string) => void> = []
 
 api.interceptors.request.use(config => {
-  const auth = useAuth()
-  const token = auth.token
+  const token = useAuthStore.getState().token
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`
   }
@@ -51,6 +50,7 @@ api.interceptors.response.use(
         requestQueue.forEach(callback => callback(newToken))
         requestQueue = []
 
+        useAuthStore.setState({ token: newToken })
         config.headers['Authorization'] = `Bearer ${newToken}`
         return api(config)
       } catch (refreshError) {
