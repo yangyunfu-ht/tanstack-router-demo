@@ -68,10 +68,14 @@ const Home: React.FC = () => {
             className='space-y-4'
           >
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label
+                htmlFor='username'
+                className='block text-sm font-medium text-gray-700 mb-1'
+              >
                 用户名
               </label>
               <input
+                id='username'
                 type='text'
                 value={userName}
                 onChange={e => setUserName(e.target.value)}
@@ -80,10 +84,14 @@ const Home: React.FC = () => {
               />
             </div>
             <div>
-              <label className='block text-sm font-medium text-gray-700 mb-1'>
+              <label
+                htmlFor='password'
+                className='block text-sm font-medium text-gray-700 mb-1'
+              >
                 密码
               </label>
               <input
+                id='password'
                 type='password'
                 value={password}
                 onChange={e => setPassword(e.target.value)}
