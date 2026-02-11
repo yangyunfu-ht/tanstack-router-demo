@@ -1,11 +1,10 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { useAuth } from '@/contexts/useAuthContext'
+import { useAuthStore } from '@/stores/useAuthStore'
 import { fetchPosts } from '@/api/posts'
 
 const About: React.FC = () => {
-  const auth = useAuth()
-  console.log(auth)
+  const user = useAuthStore(state => state.user)
 
   const {
     data: posts,
@@ -21,7 +20,7 @@ const About: React.FC = () => {
   return (
     <div className='p-6'>
       <h1 className='text-2xl font-bold mb-4'>
-        About Page (User: {auth.user?.name || 'Guest'})
+        About Page (User: {user?.name || 'Guest'})
       </h1>
 
       <div className='mb-6 p-4 bg-blue-50 rounded-lg'>

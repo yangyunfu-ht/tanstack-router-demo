@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { useAuth } from '@/contexts/useAuthContext'
+import { useAuthStore } from '@/stores/useAuthStore'
 
 const Home: React.FC = () => {
   const navigate = useNavigate()
-  const auth = useAuth()
+
+  // 使用 Selector 优化性能：仅订阅需要的状态
+  const isAuthenticated = useAuthStore(state => state.isAuthenticated)
+  const user = useAuthStore(state => state.user)
+  const login = useAuthStore(state => state.login)
+  const logout = useAuthStore(state => state.logout)
+  const isLoading = useAuthStore(state => state.isLoading)
 
   const [count, setCount] = useState(0)
   const [userName, setUserName] = useState('')
@@ -13,11 +19,11 @@ const Home: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!userName || !password) return
-    await auth.login({ userName, password })
+    await login({ userName, password })
   }
 
   const handleLogout = () => {
-    auth.logout().finally(() => {
+    logout().finally(() => {
       setUserName('')
       setPassword('')
     })
@@ -44,15 +50,13 @@ const Home: React.FC = () => {
       <div className='mb-8 p-6 bg-white rounded-lg shadow-md border border-gray-100'>
         <h2 className='text-xl font-bold mb-4 text-gray-800'>用户认证</h2>
 
-        {auth.isAuthenticated && auth.user ? (
+        {isAuthenticated && user ? (
           <div className='space-y-4'>
             <div className='p-4 bg-green-50 text-green-700 rounded-md border border-green-100 flex items-center gap-3'>
               <div className='w-2 h-2 rounded-full bg-green-500'></div>
               <div>
                 <p className='text-sm text-green-600'>当前状态</p>
-                <p className='font-semibold text-lg'>
-                  已登录: {auth.user.name}
-                </p>
+                <p className='font-semibold text-lg'>已登录: {user.name}</p>
               </div>
             </div>
             <button
@@ -101,10 +105,10 @@ const Home: React.FC = () => {
             </div>
             <button
               type='submit'
-              disabled={auth.isLoading}
+              disabled={isLoading}
               className='w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-sm cursor-pointer'
             >
-              {auth.isLoading ? '登录中...' : '登录'}
+              {isLoading ? '登录中...' : '登录'}
             </button>
           </form>
         )}
