@@ -33,22 +33,30 @@ export const useAuthStore = create<AuthState>()(
       login: async (userData: UserData) => {
         set({ isLoading: true })
         try {
-          await new Promise(resolve => setTimeout(resolve, 500))
-          const user = {
-            id: '1',
-            name: userData.userName,
-            permissions: ['read', 'write'],
-          }
-          const token = 'fake-jwt-token'
-          const refreshToken = 'fake-refresh-token'
-          set({ isAuthenticated: true, user, token, refreshToken })
+          const { isAuthenticated, user, token, refreshToken } = await Promise.resolve({
+            isAuthenticated: true,
+            user: {
+              id: '1',
+              name: userData.userName,
+              permissions: ['read', 'write'],
+            },
+            token: 'fake-jwt-token',
+            refreshToken: 'fake-refresh-token',
+          })
+
+          set({
+            isAuthenticated,
+            user,
+            token,
+            refreshToken,
+          })
         } catch (error) {
           console.error('Login failed:', error)
         } finally {
           set({ isLoading: false })
         }
       },
-      logout: async() => {
+      logout: async () => {
         set({
           isAuthenticated: false,
           user: null,
