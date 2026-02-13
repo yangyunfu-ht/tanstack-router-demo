@@ -19,18 +19,20 @@ const About: React.FC = () => {
 
   return (
     <div className='p-6'>
-      <h1 className='text-2xl font-bold mb-4'>
+      <h1 className='text-2xl font-bold mb-4 text-gray-900 dark:text-white'>
         About Page (User: {user?.name || 'Guest'})
       </h1>
 
-      <div className='mb-6 p-4 bg-blue-50 rounded-lg'>
-        <h2 className='text-xl font-semibold mb-2'>TanStack Query Demo</h2>
-        <p className='text-gray-600 mb-4'>
-          Fetching data from jsonplaceholder...
+      <div className='mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg transition-colors duration-200'>
+        <h2 className='text-xl font-semibold mb-2 text-gray-900 dark:text-white'>
+          TanStack Query Demo
+        </h2>
+        <p className='text-gray-600 dark:text-gray-300 mb-4'>
+          Fetching data from json placeholder...
         </p>
 
         {isLoading && (
-          <div className='flex items-center text-blue-600'>
+          <div className='flex items-center text-blue-600 dark:text-blue-400 bg-transparent'>
             <svg
               className='animate-spin h-5 w-5 mr-3'
               viewBox='0 0 24 24'
@@ -54,7 +56,7 @@ const About: React.FC = () => {
         )}
 
         {isError && (
-          <div className='p-4 bg-red-100 text-red-700 rounded-md'>
+          <div className='p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-md'>
             Error: {error instanceof Error ? error.message : 'Unknown error'}
           </div>
         )}
@@ -63,7 +65,7 @@ const About: React.FC = () => {
           <div className='space-y-4'>
             <button
               onClick={() => refetch()}
-              className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'
+              className='px-4 py-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white rounded transition-colors cursor-pointer'
             >
               Refetch Data
             </button>
@@ -71,10 +73,14 @@ const About: React.FC = () => {
               {posts.map(post => (
                 <div
                   key={post.id}
-                  className='bg-white p-4 rounded shadow-sm border border-gray-100'
+                  className='bg-white dark:bg-gray-800 p-4 rounded shadow-sm border border-gray-100 dark:border-gray-700 transition-colors duration-200'
                 >
-                  <h3 className='font-bold text-lg mb-2'>{post.title}</h3>
-                  <p className='text-gray-600'>{post.body}</p>
+                  <h3 className='font-bold text-lg mb-2 text-gray-900 dark:text-white'>
+                    {post.title}
+                  </h3>
+                  <p className='text-gray-600 dark:text-gray-300'>
+                    {post.body}
+                  </p>
                 </div>
               ))}
             </div>

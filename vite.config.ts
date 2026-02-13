@@ -54,10 +54,16 @@ export default defineConfig({
             if (id.includes('@tanstack')) {
               return 'vendor-tanstack'
             }
-            // 其他较大的第三方依赖
-            if (id.includes('node_modules')) {
-              return 'vendor-libs'
+            // 将 AG Grid 相关库打包到一起
+            if (id.includes('ag-grid')) {
+              return 'vendor-ag-grid'
             }
+            // 将 ECharts 相关库打包到一起
+            if (id.includes('echarts') || id.includes('zrender')) {
+              return 'vendor-echarts'
+            }
+            // 其他较大的第三方依赖
+            return 'vendor-libs'
           }
         },
       },

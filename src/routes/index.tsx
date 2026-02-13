@@ -101,7 +101,27 @@ const dataRoute = createRoute({
   },
 })
 
-const NoAuthRoute = createRoute({
+const uploadRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'upload',
+  staticData: {
+    title: '大文件上传',
+    icon: 'upload',
+  },
+  component: lazyRouteComponent(() => import('@/views/Upload')),
+})
+
+const treeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'tree',
+  staticData: {
+    title: '树形选择',
+    icon: 'tree',
+  },
+  component: lazyRouteComponent(() => import('@/views/TreeDemo')),
+})
+
+const noAuthRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'no-auth',
   staticData: {
@@ -117,7 +137,9 @@ const routeTree = rootRoute.addChildren([
   userDetailRoute,
   dashboardRoute.addChildren([dashboardIndexRoute, dashboardSettingsRoute]),
   dataRoute,
-  NoAuthRoute,
+  uploadRoute,
+  treeRoute,
+  noAuthRoute,
 ])
 
 export const router = createRouter({

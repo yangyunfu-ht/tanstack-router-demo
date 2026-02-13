@@ -4,7 +4,6 @@ import { Outlet, Link } from '@tanstack/react-router'
 const Dashboard: React.FC = () => {
   return (
     <div className='p-4 bg-gray-100'>
-      <h2>控制面板侧边栏</h2>
       <div className='flex gap-4'>
         <Link to='/dashboard'>概览</Link> |
         <Link to='/dashboard/settings'>设置</Link>
