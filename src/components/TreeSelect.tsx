@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 
 export interface TreeNodeData {
   id: string
@@ -99,11 +99,11 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
   }, [isOpen, searchable])
 
   // 关闭下拉框时清除搜索
-  const closeDropdown = () => {
+  const closeDropdown = useCallback(() => {
     setIsOpen(false)
     setSearchTerm('')
     setFilteredData(data)
-  }
+  }, [data])
 
   // 点击外部关闭下拉框
   useEffect(() => {
@@ -117,7 +117,7 @@ const TreeSelect: React.FC<TreeSelectProps> = ({
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [data]) // Added data dependency just in case, though closeDropdown uses data
+  }, [closeDropdown])
 
   const handleToggleExpand = (e: React.MouseEvent, id: string) => {
     e.stopPropagation()

@@ -186,6 +186,41 @@ const MainLayout: React.FC = () => {
                 🌳 Tree
               </Link>
               <Link
+                to='/button'
+                onClick={closeSidebar}
+                className='block px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 [&.active]:bg-blue-50 dark:[&.active]:bg-blue-900/20 [&.active]:text-blue-600 dark:[&.active]:text-blue-400 transition-colors'
+              >
+                🔘 Button
+              </Link>
+              <Link
+                to='/ag-grid'
+                onClick={closeSidebar}
+                className='block px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 [&.active]:bg-blue-50 dark:[&.active]:bg-blue-900/20 [&.active]:text-blue-600 dark:[&.active]:text-blue-400 transition-colors'
+              >
+                🧮 AG Grid
+              </Link>
+              <Link
+                to='/skeleton'
+                onClick={closeSidebar}
+                className='block px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 [&.active]:bg-blue-50 dark:[&.active]:bg-blue-900/20 [&.active]:text-blue-600 dark:[&.active]:text-blue-400 transition-colors'
+              >
+                💀 Skeleton
+              </Link>
+              <Link
+                to='/timeline'
+                onClick={closeSidebar}
+                className='block px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 [&.active]:bg-blue-50 dark:[&.active]:bg-blue-900/20 [&.active]:text-blue-600 dark:[&.active]:text-blue-400 transition-colors'
+              >
+                📅 Timeline
+              </Link>
+              <Link
+                to='/tabs'
+                onClick={closeSidebar}
+                className='block px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 [&.active]:bg-blue-50 dark:[&.active]:bg-blue-900/20 [&.active]:text-blue-600 dark:[&.active]:text-blue-400 transition-colors'
+              >
+                📑 Tabs
+              </Link>
+              <Link
                 to='/dashboard'
                 onClick={closeSidebar}
                 className='block px-3 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 [&.active]:bg-blue-50 dark:[&.active]:bg-blue-900/20 [&.active]:text-blue-600 dark:[&.active]:text-blue-400 transition-colors'

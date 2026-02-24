@@ -121,6 +121,56 @@ const treeRoute = createRoute({
   component: lazyRouteComponent(() => import('@/views/TreeDemo')),
 })
 
+const buttonDemoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'button',
+  staticData: {
+    title: 'Button 组件',
+    icon: 'button',
+  },
+  component: lazyRouteComponent(() => import('@/views/ButtonDemo')),
+})
+
+const agGridDemoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'ag-grid',
+  staticData: {
+    title: 'AG Grid 组件',
+    icon: 'table',
+  },
+  component: lazyRouteComponent(() => import('@/views/AgGridDemo')),
+})
+
+const skeletonDemoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'skeleton',
+  staticData: {
+    title: 'Skeleton 组件',
+    icon: 'loader',
+  },
+  component: lazyRouteComponent(() => import('@/views/SkeletonDemo')),
+})
+
+const timelineDemoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'timeline',
+  staticData: {
+    title: 'Timeline 组件',
+    icon: 'list-video',
+  },
+  component: lazyRouteComponent(() => import('@/views/TimelineDemo')),
+})
+
+const tabsDemoRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: 'tabs',
+  staticData: {
+    title: 'Tabs 组件',
+    icon: 'folder',
+  },
+  component: lazyRouteComponent(() => import('@/views/TabsDemo')),
+})
+
 const noAuthRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: 'no-auth',
@@ -139,6 +189,11 @@ const routeTree = rootRoute.addChildren([
   dataRoute,
   uploadRoute,
   treeRoute,
+  buttonDemoRoute,
+  agGridDemoRoute,
+  skeletonDemoRoute,
+  timelineDemoRoute,
+  tabsDemoRoute,
   noAuthRoute,
 ])
 
